@@ -38,5 +38,6 @@ module App
     config.add_autoload_paths_to_load_path = false
 
     config.api_only = true
+    config.middleware.use ActionDispatch::Flash
   end
 end
