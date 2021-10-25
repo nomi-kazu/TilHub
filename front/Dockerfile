@@ -15,6 +15,12 @@ RUN echo ${HOME}
 RUN echo ${CONTAINER_PORT}
 RUN echo ${API_URL}
 
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache make gcc g++ python && \
+    yarn install && \
+    rm -rf /var/cache/apk/*
+
 WORKDIR ${HOME}
 
 EXPOSE ${CONTAINER_PORT}

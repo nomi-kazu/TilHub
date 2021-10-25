@@ -37,6 +37,10 @@ module App
     # $LOAD_PATHにautoload pathを追加しない(Zeitwerk有効時false推奨)
     config.add_autoload_paths_to_load_path = false
 
+    # クロスオリジンの検証を無効
+    config.action_controller.forgery_protection_origin_check = false
+
     config.api_only = true
+    config.middleware.use ActionDispatch::Flash
   end
 end
