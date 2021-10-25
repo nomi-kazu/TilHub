@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
 
   # Can't verify CSRF token authenticity エラーを出力するように設定
