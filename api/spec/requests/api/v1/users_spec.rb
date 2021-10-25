@@ -12,4 +12,15 @@ RSpec.describe "Api::V1::Users", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "validates length" do
+    context "パスワードが８文字以下の場合" do
+      let(:user) { build(:user, password: 'pass') }
+
+      it "エラーになる" do
+        user.valid?
+        expect(user.errors.messages[:password]).to include "は8文字以上で入力してください"
+      end
+    end
+  end
 end
