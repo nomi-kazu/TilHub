@@ -2,6 +2,11 @@ module Api
   module V1
     module Auth
       class RegistrationsController < DeviseTokenAuth::RegistrationsController
+        before_action :authenticate_api_v1_user!, except:[:create, :new]
+
+        def edit
+          render json: current_api_v1_user, serializer: UserSerializer
+        end
 
         private
 
