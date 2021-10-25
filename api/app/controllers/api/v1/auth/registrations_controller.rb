@@ -13,6 +13,14 @@ module Api
         def account_update_params
           params.permit(:name, :nickname, :image)
         end
+
+        def render_create_success
+          render json: @resource, serializer: UserSerializer
+        end
+
+        def render_update_success
+          render json: @resource, serializer: UserSerializer
+        end
       end
     end
   end
