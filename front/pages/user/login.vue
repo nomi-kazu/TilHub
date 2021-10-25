@@ -19,7 +19,12 @@
           />
 
           <v-card-actions>
-            <v-btn class="info" large block>
+            <v-btn
+              class="info"
+              large
+              block
+              @click="login"
+            >
               ログイン
             </v-btn>
           </v-card-actions>
@@ -43,6 +48,20 @@ export default {
         return value.length >= 8 || 'Min 8 characters'
       }
     }
-  })
+  }),
+  methods: {
+    async login () {
+      try {
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        })
+      } catch (e) {
+        window.console.log(e)
+      }
+    }
+  }
 }
 </script>

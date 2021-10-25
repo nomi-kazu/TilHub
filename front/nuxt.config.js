@@ -45,11 +45,23 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'api/v1/auth/sign_in', method: 'post', propertyName: 'token' },
+          user: false,
+          logout: false
+        }
+      }
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
