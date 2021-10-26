@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ $store.state.uid }} : {{ $store.state.access_token }}</p>
+    <p>{{ $store.state.uid }} : {{ $store.state.accessToken }}</p>
   </div>
 </template>
 

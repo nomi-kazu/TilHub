@@ -25,16 +25,14 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link to="/user/logout">
-          <v-list-item link>
-            <v-list-item-action>
-              <v-icon>mdi-account-cancel-outline</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>ログアウト</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </nuxt-link>
+        <v-list-item link @click="logout">
+          <v-list-item-action>
+            <v-icon>mdi-account-cancel-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>ログアウト</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <nuxt-link to="/user/sign_up">
           <v-list-item link>
             <v-list-item-action>
@@ -83,12 +81,32 @@
 </template>
 
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
+
 export default {
   props: {
   },
   data: () => ({
     drawer: null
-  })
+  }),
+  methods: {
+    async logout () {
+      try {
+        await this.$store.dispatch('logout',
+          {
+            accessToken: Cookie.get('access-token'),
+            client: Cookie.get('client'),
+            uid: Cookie.get('uid')
+          })
+        Cookie.remove('access-token')
+        Cookie.remove('client')
+        Cookie.remove('uid')
+        this.$router.push('/user/login')
+      } catch (e) {
+        console.log(this.formError)
+      }
+    }
+  }
 }
 </script>
 
