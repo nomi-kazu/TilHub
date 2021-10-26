@@ -22,12 +22,6 @@
           />
 
           <v-text-field
-            v-model="nickname"
-            :rules="[rules.required]"
-            label="ニックネーム"
-          />
-
-          <v-text-field
             v-model="email"
             :rules="[rules.required]"
             label="メール"
@@ -43,22 +37,12 @@
             @click:append="showPassword = !showPassword"
           />
 
-          <v-text-field
-            v-model="passwordConfirmation"
-            :rules="[rules.required, rules.min]"
-            :type="showPassword ? 'text' : 'password'"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            label="パスワード確認"
-            counter
-            @click:append="showPassword = !showPassword"
-          />
-
           <v-card-actions>
             <v-btn
               class="info"
               large
               block
-              @click="login"
+              @click="signUp"
             >
               ログイン
             </v-btn>
@@ -74,27 +58,21 @@ export default {
   data: () => ({
     showPassword: false,
     name: '',
-    nickname: '',
     email: '',
     password: '',
-    passwordConfirmation: '',
     rules: {
       required: (value) => { return !!value || 'Required.' },
       min: (value) => { return value.length >= 8 || 'Min 8 characters' }
     }
   }),
   methods: {
-    async login () {
-      try {
-        await this.$auth.loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password
-          }
-        })
-      } catch (e) {
-        window.console.log(e)
-      }
+    async signUp () {
+      await this.$axios.post('/api/v1/auth', {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      })
+      this.$router.push('/user/confirm')
     }
   }
 }
