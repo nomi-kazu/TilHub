@@ -50,7 +50,7 @@ export default {
     isNotValid: true,
     password: '',
     email: '',
-    errors: [],
+    error: [],
     rules: {
       required: (value) => {
         return !!value || '入力してください'
@@ -77,7 +77,7 @@ export default {
     }
   },
   methods: {
-    async login () {
+    async login (e) {
       try {
         await this.$store.dispatch('login', {
           email: this.email,
@@ -88,11 +88,8 @@ export default {
         Cookie.set('uid', this.$store.state.uid)
         this.$router.push(`/user/${this.$store.state.id}`)
       } catch (e) {
-        this.formError = e.message
+        console.log(this.formError)
       }
-    },
-    validPasswordLength () {
-      return this.password >= 8
     }
   }
 }

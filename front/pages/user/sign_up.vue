@@ -42,9 +42,10 @@
               class="info"
               large
               block
+              :disabled="isNotValid"
               @click="signUp"
             >
-              ログイン
+              新規登録
             </v-btn>
           </v-card-actions>
         </v-form>
@@ -57,14 +58,38 @@
 export default {
   data: () => ({
     showPassword: false,
+    isNotValid: true,
     name: '',
     email: '',
     password: '',
     rules: {
-      required: (value) => { return !!value || 'Required.' },
-      min: (value) => { return value.length >= 8 || 'Min 8 characters' }
+      required: (value) => { return !!value || '入力してください' },
+      min: (value) => { return value.length >= 8 || '8文字以上入力してください' }
     }
   }),
+  watch: {
+    email (e) {
+      if (this.email && this.checkPassword() && this.name) {
+        this.isNotValid = false
+      } else {
+        this.isNotValid = true
+      }
+    },
+    password (e) {
+      if (this.email && this.checkPassword() && this.name) {
+        this.isNotValid = false
+      } else {
+        this.isNotValid = true
+      }
+    },
+    name (e) {
+      if (this.email && this.checkPassword() && this.name) {
+        this.isNotValid = false
+      } else {
+        this.isNotValid = true
+      }
+    }
+  },
   methods: {
     async signUp () {
       await this.$axios.post('/api/v1/auth', {
@@ -73,6 +98,9 @@ export default {
         password: this.password
       })
       this.$router.push('/user/confirm')
+    },
+    checkPassword () {
+      return this.password.length >= 8 && this.password
     }
   }
 }
