@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_143954) do
     t.json "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "address"
+    t.string "address", limit: 30
     t.string "profile"
     t.string "username", limit: 30
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
