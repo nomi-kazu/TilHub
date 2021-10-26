@@ -80,7 +80,6 @@ export default {
 
 <style scoped lang="scss">
   .title {
-    margin-top: 30px;
     text-align: center;
     .main-title {
         margin-bottom: 20px;
