@@ -25,6 +25,16 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
+        <nuxt-link to="/user/logout">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-account-cancel-outline</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>ログアウト</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
         <nuxt-link to="/user/sign_up">
           <v-list-item link>
             <v-list-item-action>
@@ -42,16 +52,6 @@
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>マイページ</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </nuxt-link>
-        <nuxt-link to="#">
-          <v-list-item link>
-            <v-list-item-action>
-              <v-icon>mdi-book-open-variant</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>TIL</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
