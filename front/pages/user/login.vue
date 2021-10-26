@@ -10,6 +10,7 @@
         <v-form>
           <v-text-field
             v-model="email"
+            :rules="[rules.required]"
             label="メール"
           />
 
@@ -28,6 +29,7 @@
               class="info"
               large
               block
+              :disabled="isNotValid"
               @click="login"
             >
               ログイン
@@ -45,17 +47,35 @@ const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   data: () => ({
     showPassword: false,
+    isNotValid: true,
     password: '',
     email: '',
+    errors: [],
     rules: {
       required: (value) => {
-        return !!value || 'Required.'
+        return !!value || '入力してください'
       },
       min: (value) => {
-        return value.length >= 8 || 'Min 8 characters'
+        return value.length >= 8 || '8文字以上入力してください'
       }
     }
   }),
+  watch: {
+    email (e) {
+      if (this.email && this.password && this.password.length >= 8) {
+        this.isNotValid = false
+      } else {
+        this.isNotValid = true
+      }
+    },
+    password (e) {
+      if (this.email && this.password && this.password.length >= 8) {
+        this.isNotValid = false
+      } else {
+        this.isNotValid = true
+      }
+    }
+  },
   methods: {
     async login () {
       try {
@@ -70,7 +90,11 @@ export default {
       } catch (e) {
         this.formError = e.message
       }
+    },
+    validPasswordLength () {
+      return this.password >= 8
     }
   }
 }
+
 </script>
