@@ -1,22 +1,12 @@
 <template>
   <div>
-    <v-btn
-      type="button"
-      name="button"
-      @click="getMsg"
-    >
-      RailsからAPIを取得する
-    </v-btn>
-    <div
-      v-for="(msg, i) in msgs"
-      :key="i"
-    >
-      {{ msg }}
-    </div>
+    <p>{{ $store.state.uid }} : {{ $store.state.accessToken }}</p>
   </div>
 </template>
 
 <script>
+// const Cookie = process.client ? require('js-cookie') : undefined
+
 export default {
   data () {
     return {
@@ -24,10 +14,6 @@ export default {
     }
   },
   methods: {
-    getMsg () {
-      this.$axios.$get('/api/v1/hello')
-        .then(res => this.msgs.push(res))
-    }
   }
 }
 </script>

@@ -38,7 +38,7 @@ module App
     config.add_autoload_paths_to_load_path = false
 
     # クロスオリジンの検証を無効
-    config.action_controller.forgery_protection_origin_check = false
+    # config.action_controller.forgery_protection_origin_check = false
 
     config.api_only = true
     config.middleware.use ActionDispatch::Flash

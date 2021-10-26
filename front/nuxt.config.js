@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
+import Sass from 'sass'
+import Fiber from 'fibers'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -24,11 +26,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    { src: '~/assets/scss/common.scss', lang: 'scss' }
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    'plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/nuxt-client-init.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,17 +49,30 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/style-resources'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: 'api/v1/auth/sign_in', method: 'post', propertyName: 'token' },
+  //         user: false,
+  //         logout: false
+  //       }
+  //     }
+  //   }
+  // },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -69,8 +86,19 @@ export default {
       }
     }
   },
+  styleResources: {
+    scss: ['~/assets/scss/variables.scss']
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    loaders: {
+      scss: {
+        implementation: Sass,
+        sassOptions: {
+          fiber: Fiber
+        }
+      }
+    }
   }
 }
