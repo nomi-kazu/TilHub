@@ -35,6 +35,8 @@
 </template>
 
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
+
 export default {
   data: () => ({
     showPassword: false,
@@ -52,14 +54,18 @@ export default {
   methods: {
     async login () {
       try {
-        await this.$auth.loginWith('local', {
+        console.log('vrav')
+        await this.$store.dispatch('login', {
           data: {
             email: this.email,
             password: this.password
           }
         })
+        Cookie.set('access-token', this.$store.state.access_token)
+        this.$router.push('/')
       } catch (e) {
-        window.console.log(e)
+        this.formError = e.message
+        console.log(this.formError)
       }
     }
   }
