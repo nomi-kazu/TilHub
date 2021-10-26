@@ -39,5 +39,15 @@ RSpec.describe User, type: :model do
         expect(user2.errors.messages[:email]).to include "はすでに存在します"
       end
     end
+
+    context "保存されたユーザーネームが指定されたとき" do
+      let(:user1) { create(:user) }
+      let(:user2) { build(:user, username: user1.username) }
+
+      it "エラーになる" do
+        user2.valid?
+        expect(user2.errors.messages[:username]).to include "はすでに存在します"
+      end
+    end
   end
 end 
