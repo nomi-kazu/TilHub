@@ -5,7 +5,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
     subject(:call_api) { post(api_v1_user_registration_path, params: params) }
     let(:params) { attributes_for(:user) }
     it "ユーザー登録できる" do
-      subject
+      call_api
       res = JSON.parse(response.body)
       expect(res["data"]["id"]).to eq(User.last.id.to_s)
       expect(res["data"]["attributes"]["name"]).to eq(User.last.name)
@@ -25,13 +25,13 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
   end
 
   describe "POST /api/v1/auth/sign_in" do
-    subject { post(api_v1_user_session_path, params: params) }
+    subject(:call_api) { post(api_v1_user_session_path, params: params) }
 
     context "メールアドレス、パスワードが正しく、有効化もされているとき" do
       let(:confirmed_user) { create(:confirmed_user) }
       let(:params) { { email: confirmed_user.email, password: confirmed_user.password } }
       it "ログインできる" do
-        subject
+        call_api
         res = JSON.parse(response.body)
         expect(response.headers["uid"]).to be_present
         expect(response.headers["access-token"]).to be_present
@@ -44,7 +44,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       let(:user) { create(:confirmed_user) }
       let(:params) { { email: "invalid@example.com", password: user.password } }
       it "ログインできない" do
-        subject
+        call_api
         res = JSON.parse(response.body)
         expect(res["success"]).to be_falsey
         expect(res["errors"]).to include("ログイン用の認証情報が正しくありません。再度お試しください。")
@@ -59,7 +59,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       let(:user) { create(:confirmed_user) }
       let(:params) { { email: user.email, password: "invalidpassword" } }
       it "ログインできない" do
-        subject
+        call_api
         res = JSON.parse(response.body)
         expect(res["success"]).to be_falsey
         expect(res["errors"]).to include("ログイン用の認証情報が正しくありません。再度お試しください。")
@@ -74,7 +74,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       let(:user) { create(:user) }
       let(:params) { { email: user.email, password: user.password } }
       it "ログインできない" do
-        subject
+        call_api
         res = JSON.parse(response.body)
         expect(response.headers["uid"]).not_to be_present
         expect(response.headers["access-token"]).not_to be_present
