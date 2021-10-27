@@ -21,11 +21,11 @@ export const mutations = {
     state.accessToken = header['access-token']
     state.uid = header.uid
     state.client = header.client
-    state.isAuthenticated = true
+    state.isAuthenticated = false
   },
   clearUser (state) {
     state.accessToken = null
-    state.isAuthenticated = null
+    state.isAuthenticated = false
     state.uid = null
     state.client = null
     state.id = null
