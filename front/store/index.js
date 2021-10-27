@@ -17,11 +17,11 @@ export const mutations = {
     state.id = res.data.data.id
     state.isAuthenticated = true
   },
-  setHeader (state, header) {
+  setHeader (state, { header, authFlag }) {
     state.accessToken = header['access-token']
     state.uid = header.uid
     state.client = header.client
-    state.isAuthenticated = false
+    state.isAuthenticated = authFlag
   },
   clearUser (state) {
     state.accessToken = null
@@ -67,8 +67,11 @@ export const actions = {
   nuxtClientInit ({ commit }) {
     const parsed = cookieparser
     try {
-      console.log(parsed)
-      commit('setHeader', parsed)
+      let authFlag = false
+      if (parsed.uid) {
+        authFlag = true
+      }
+      commit('setHeader', { header: parsed, authFlag })
     } catch (err) {
       // No valid cookie found
     }
