@@ -18,6 +18,11 @@
 
 <script>
 export default {
+  middleware ({ store, redirect }) {
+    if (!store.state.isAuthenticated) {
+      redirect('/user/login')
+    }
+  },
   asyncData ({ $axios, params }) {
     return $axios.$get(`/api/v1/users/${params.id}`)
       .then((res) => {
