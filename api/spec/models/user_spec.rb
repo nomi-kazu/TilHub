@@ -49,5 +49,20 @@ RSpec.describe User, type: :model do
         expect(user2.errors.messages[:username]).to include "はすでに存在します"
       end
     end
+    context "名前が50文字以上の場合" do
+      let(:user) { build(:user, name: 'a' * 51) }
+      it "エラーになる" do
+        user.valid?
+        expect(user.errors.messages[:name]).to include "は50文字以内で入力してください"
+      end
+    end
+
+    context "住所が30文字以上の場合" do
+      let(:user) { build(:user, address: 'a' * 31) }
+      it "エラーになる" do
+        user.valid?
+        expect(user.errors.messages[:address]).to include "は30文字以内で入力してください"
+      end
+    end
   end
 end 
