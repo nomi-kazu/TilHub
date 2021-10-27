@@ -4,6 +4,9 @@
       <h3 class="name">
         {{ data.data.attributes.name }}
       </h3>
+      <nuxt-link to="/user/edit/1">
+        編集する
+      </nuxt-link>
     </div>
     <div class="cards">
       <div class="card">
