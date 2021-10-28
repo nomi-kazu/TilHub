@@ -2,7 +2,7 @@
   <div>
     <div class="top">
       <h3 class="name">
-        {{ data.data.attributes.name }}
+        {{ data.attributes.name }}
       </h3>
       <nuxt-link to="/user/edit/1">
         編集する
@@ -22,11 +22,13 @@
 <script>
 export default {
   middleware: 'authenticated',
-  asyncData ({ $axios, params }) {
-    return $axios.$get(`/api/v1/users/${params.id}`)
-      .then((res) => {
-        return { data: res }
-      })
+  async asyncData ({ $axios, params }) {
+    try {
+      const { data } = await $axios.$get(`/api/v1/users/${params.id}`)
+      return { data }
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 </script>

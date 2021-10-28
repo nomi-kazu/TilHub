@@ -45,11 +45,13 @@
 
 <script>
 export default {
-  asyncData ({ $axios, params }) {
-    return $axios.$get('/api/v1/auth/edit')
-      .then((res) => {
-        return { info: res }
-      })
+  async asyncData ({ $axios }) {
+    try {
+      const { data } = await $axios.$get('/api/v1/auth/edit')
+      return { info: data }
+    } catch (e) {
+      console.error(e)
+    }
   },
   data: () => ({
     showPassword: false,
@@ -71,10 +73,10 @@ export default {
       }
     }
   },
-  mounted () {
-    this.name = this.info.data.attributes.name
-    this.profile = this.info.data.attributes.profile
-    this.address = this.info.data.attributes.address
+  created () {
+    this.name = this.info.attributes.name
+    this.profile = this.info.attributes.profile
+    this.address = this.info.attributes.address
   },
   methods: {
     async store () {
