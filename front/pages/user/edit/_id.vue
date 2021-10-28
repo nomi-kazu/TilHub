@@ -35,18 +35,9 @@
 </template>
 
 <script>
-const Cookie = process.client ? require('js-cookie') : undefined
-
 export default {
   asyncData ({ $axios, params }) {
-    return $axios.$get('/api/v1/auth/edit', {
-      headers:
-        {
-          access_token: Cookie.get('access-token'),
-          client: Cookie.get('client'),
-          uid: Cookie.get('uid')
-        }
-    })
+    return $axios.$get('/api/v1/auth/edit')
       .then((res) => {
         return { info: res }
       })
