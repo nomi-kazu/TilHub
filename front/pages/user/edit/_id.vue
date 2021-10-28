@@ -77,14 +77,17 @@ export default {
     this.address = this.info.data.attributes.address
   },
   methods: {
-    store () {
-      this.$axios.put('/api/v1/auth',
-        {
-          name: this.name,
-          profile: this.profile,
-          address: this.address
-        }
-      )
+    async store () {
+      try {
+        await this.$axios.put('/api/v1/auth',
+          {
+            name: this.name,
+            profile: this.profile,
+            address: this.address
+          })
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 }
