@@ -92,12 +92,16 @@ export default {
   },
   methods: {
     async signUp () {
-      await this.$axios.post('/api/v1/auth', {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      })
-      this.$router.push('/user/confirm')
+      try {
+        await this.$axios.post('/api/v1/auth', {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+        this.$router.push('/user/confirm')
+      } catch (error) {
+        console.error(error)
+      }
     },
     checkPassword () {
       return this.password.length >= 8 && this.password
