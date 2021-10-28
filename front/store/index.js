@@ -67,10 +67,7 @@ export const actions = {
   nuxtClientInit ({ commit }) {
     const parsed = cookieparser
     try {
-      let authFlag = false
-      if (parsed.uid) {
-        authFlag = true
-      }
+      const authFlag = parsed.uid
       commit('setHeader', { header: parsed, authFlag })
     } catch (err) {
       // No valid cookie found

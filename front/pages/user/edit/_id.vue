@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <div class="title">
       <h2 class="main-title">
         ユーザ編集
@@ -22,16 +22,16 @@
           />
 
           <v-textarea
-            v-model="selfIntroduction"
+            v-model="profile"
             label="プロフィール文" />
 
           <v-card-actions>
-            <v-btn :disabled="isNotValid"  class="info" large block>保存</v-btn>
+            <v-btn :disabled="isNotValid" @click="store" class="info" large block>保存</v-btn>
           </v-card-actions>
         </v-form>
       </v-card-text>
     </v-card>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -55,32 +55,16 @@ export default {
     showPassword: false,
     isNotValid: true,
     name: '',
-    email: '',
     address: '',
-    password: '',
-    selfIntroduction: '',
+    profile: '',
     rules: {
       required: (value) => { return !!value || '入力してください.' },
       min: (value) => { return value.length >= 8 || '８文字以上入力してください' }
     }
   }),
   watch: {
-    email (e) {
-      if (this.email && this.checkPassword() && this.name) {
-        this.isNotValid = false
-      } else {
-        this.isNotValid = true
-      }
-    },
-    password (e) {
-      if (this.email && this.checkPassword() && this.name) {
-        this.isNotValid = false
-      } else {
-        this.isNotValid = true
-      }
-    },
     name (e) {
-      if (this.email && this.checkPassword() && this.name) {
+      if (this.name) {
         this.isNotValid = false
       } else {
         this.isNotValid = true
@@ -88,8 +72,20 @@ export default {
     }
   },
   mounted () {
-    console.log(this.info.data.attributes.name)
     this.name = this.info.data.attributes.name
+    this.profile = this.info.data.attributes.profile
+    this.address = this.info.data.attributes.address
+  },
+  methods: {
+    store () {
+      this.$axios.put('/api/v1/auth',
+        {
+          name: this.name,
+          profile: this.profile,
+          address: this.address
+        }
+      )
+    }
   }
 }
 </script>

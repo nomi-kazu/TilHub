@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <div class="top">
       <h3 class="name">
         {{ data.data.attributes.name }}
@@ -16,16 +16,12 @@
         </nuxt-link>
       </div>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
 export default {
-  middleware ({ store, redirect }) {
-    if (!store.state.isAuthenticated) {
-      redirect('/user/login')
-    }
-  },
+  middleware: 'authenticated',
   asyncData ({ $axios, params }) {
     return $axios.$get(`/api/v1/users/${params.id}`)
       .then((res) => {
