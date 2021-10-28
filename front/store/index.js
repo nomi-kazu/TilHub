@@ -17,15 +17,15 @@ export const mutations = {
     state.id = res.data.data.id
     state.isAuthenticated = true
   },
-  setHeader (state, header) {
+  setHeader (state, { header, authFlag }) {
     state.accessToken = header['access-token']
     state.uid = header.uid
     state.client = header.client
-    state.isAuthenticated = true
+    state.isAuthenticated = authFlag
   },
   clearUser (state) {
     state.accessToken = null
-    state.isAuthenticated = null
+    state.isAuthenticated = false
     state.uid = null
     state.client = null
     state.id = null
@@ -35,11 +35,13 @@ export const mutations = {
 export const actions = {
   async login ({ commit }, { email, password }) {
     try {
-      await this.$axios.post('/api/v1/auth/sign_in', { email, password }
-      ).then((res) => {
-        console.log(res.data.data.uid)
-        commit('setUser', res)
+      await this.$axios.post('/api/v1/auth/sign_in', {
+        email,
+        password
       })
+        .then((res) => {
+          commit('setUser', res)
+        })
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
@@ -67,8 +69,8 @@ export const actions = {
   nuxtClientInit ({ commit }) {
     const parsed = cookieparser
     try {
-      console.log(parsed)
-      commit('setHeader', parsed)
+      const authFlag = parsed.uid
+      commit('setHeader', { header: parsed, authFlag })
     } catch (err) {
       // No valid cookie found
     }

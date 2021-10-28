@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <div class="title">
       <h2 class="main-title">
         ユーザ登録
@@ -51,7 +51,7 @@
         </v-form>
       </v-card-text>
     </v-card>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -92,12 +92,16 @@ export default {
   },
   methods: {
     async signUp () {
-      await this.$axios.post('/api/v1/auth', {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      })
-      this.$router.push('/user/confirm')
+      try {
+        await this.$axios.post('/api/v1/auth', {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+        this.$router.push('/user/confirm')
+      } catch (error) {
+        console.error(error)
+      }
     },
     checkPassword () {
       return this.password.length >= 8 && this.password

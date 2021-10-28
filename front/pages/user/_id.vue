@@ -1,9 +1,12 @@
 <template>
-  <v-app>
+  <div>
     <div class="top">
       <h3 class="name">
-        {{ data.data.attributes.name }}
+        {{ data.attributes.name }}
       </h3>
+      <nuxt-link to="/user/edit/1">
+        編集する
+      </nuxt-link>
     </div>
     <div class="cards">
       <div class="card">
@@ -13,16 +16,19 @@
         </nuxt-link>
       </div>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
 export default {
-  asyncData ({ $axios, params }) {
-    return $axios.$get(`/api/v1/users/${params.id}`)
-      .then((res) => {
-        return { data: res }
-      })
+  middleware: 'authenticated',
+  async asyncData ({ $axios, params }) {
+    try {
+      const { data } = await $axios.$get(`/api/v1/users/${params.id}`)
+      return { data }
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 </script>
