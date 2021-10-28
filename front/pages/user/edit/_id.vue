@@ -23,10 +23,19 @@
 
           <v-textarea
             v-model="profile"
-            label="プロフィール文" />
+            label="プロフィール文"
+          />
 
           <v-card-actions>
-            <v-btn :disabled="isNotValid" @click="store" class="info" large block>保存</v-btn>
+            <v-btn
+              class="info"
+              large
+              block
+              :disabled="isNotValid"
+              @click="store"
+            >
+              保存
+            </v-btn>
           </v-card-actions>
         </v-form>
       </v-card-text>
