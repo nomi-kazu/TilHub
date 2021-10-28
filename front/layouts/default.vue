@@ -15,7 +15,7 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link v-if="!($store.state.isAuthenticated)" to="/user/login">
+        <nuxt-link v-if="!$store.state.isAuthenticated" to="/user/login">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-account-arrow-right</v-icon>
@@ -25,7 +25,7 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <v-list-item v-if="!($store.state.isAuthenticated)" link @click="logout">
+        <v-list-item v-if="!$store.state.isAuthenticated" link @click="logout">
           <v-list-item-action>
             <v-icon>mdi-account-cancel-outline</v-icon>
           </v-list-item-action>
@@ -33,7 +33,7 @@
             <v-list-item-title>ログアウト</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <nuxt-link v-if="!($store.state.isAuthenticated)" to="/user/sign_up">
+        <nuxt-link v-if="!$store.state.isAuthenticated" to="/user/sign_up">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-account-plus</v-icon>
@@ -43,7 +43,7 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link v-if="!($store.state.isAuthenticated)" to="/user/1">
+        <nuxt-link v-if="!$store.state.isAuthenticated" to="/user/1">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-account-details</v-icon>
