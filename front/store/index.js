@@ -46,7 +46,7 @@ export const actions = {
         email,
         password
       })
-        commit('setUser', res)
+      commit('setUser', res)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
@@ -68,7 +68,7 @@ export const actions = {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
       }
-      throw error
+      throw new Error("Internal Server Error")
     }
   },
   nuxtClientInit ({ commit }) {
