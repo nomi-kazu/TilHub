@@ -1,22 +1,19 @@
 module.exports = {
+  setupFiles: ['<rootDir>/test/jest.setup.js'],    // Load Mock setting
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '<rootDir>/components/**/*.vue',
+    '<rootDir>/pages/**/*.vue',
+    '<rootDir>/store/**/*.js'
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
-    '^~/(.*)$': '<rootDir>/$1',
-    '^vue$': 'vue/dist/vue.common.js'
+    '^~/(.*)$': '<rootDir>/$1'
   },
-  moduleFileExtensions: [
-    'js',
-    'vue',
-    'json'
-  ],
+  moduleFileExtensions: ['js', 'json', 'vue'],
   transform: {
     '^.+\\.js$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest'
   },
-  collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue'
-  ],
-  testEnvironment: 'jsdom'
+  transformIgnorePatterns: ['<rootDir>/node_modules/']
 }

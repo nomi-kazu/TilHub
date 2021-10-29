@@ -42,8 +42,6 @@
 </template>
 
 <script>
-const Cookie = process.client ? require('js-cookie') : undefined
-
 export default {
   data: () => ({
     showPassword: false,
@@ -79,14 +77,12 @@ export default {
   methods: {
     async login (e) {
       try {
-        await this.$store.dispatch('login', {
+        await this.$store.dispatch('authentication/login', {
           email: this.email,
           password: this.password
         })
-        Cookie.set('access-token', this.$store.state.accessToken)
-        Cookie.set('client', this.$store.state.client)
-        Cookie.set('uid', this.$store.state.uid)
-        this.$router.push(`/user/${this.$store.state.id}`)
+        
+        this.$router.push(`/user/${this.$store.getters['authentication/id']}`)
       } catch (e) {
         console.log(this.formError)
       }

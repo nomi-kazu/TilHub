@@ -98,6 +98,7 @@ export default {
           email: this.email,
           password: this.password
         })
+        
         this.$router.push('/user/confirm')
       } catch (error) {
         console.error(error)
