@@ -1,6 +1,6 @@
 export default function ({ store, redirect }) {
   // ユーザーが認証されていないとき
-  if (!store.state.isAuthenticated) {
+  if (!store.getters['authentication/isAuthenticated']) {
     redirect('/user/login')
   }
 }

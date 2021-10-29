@@ -1,15 +1,21 @@
 <template>
   <div>
-    <p>{{ $store.state.uid }} : {{ $store.state.accessToken }} : {{ $store.state.isAuthenticated }}</p>
+    <p>{{ uid }} : {{ accessToken }} : {{ isAuthenticated }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      msgs: []
-    }
+  computed: {
+    accessToken () {
+      return this.$store.getters['authentication/access_token']
+    },
+    isAuthenticated () {
+      return this.$store.getters['authentication/isAuthenticated']
+    },
+    uid () {
+      return this.$store.getters['authentication/uid']
+    },
   }
 }
 </script>
