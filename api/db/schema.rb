@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_082502) do
 
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "name", null: false
+    t.string "name", limit: 100, null: false
     t.text "content", null: false
     t.boolean "public", default: true, null: false, comment: "公開or非公開"
     t.datetime "created_at", precision: 6, null: false
