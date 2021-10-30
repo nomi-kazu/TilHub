@@ -3,6 +3,7 @@ module Api
     class PostsController < ApplicationController
       before_action :authenticate_api_v1_user!, except: [:show]
       before_action :set_post, except: %i[new create]
+      before_action :correct_user?, only: %i[update destroy]
 
       def show
         render json: @post, serializer: PostSerializer
@@ -16,9 +17,9 @@ module Api
       def create
         @post = current_api_v1_user.posts.build(post_params)
         if @post.save
-          render status: :success, json: @post
+          render json: @post, serializer: PostSerializer
         else
-          render status: error, json: @post.errors
+          render json: { success: false, errors: @post.errors }
         end
       end
 
@@ -28,28 +29,34 @@ module Api
 
       def update
         if @post.update(post_params)
-          render status: :success, json: @post
+          render json: @post, serializer: PostSerializer
         else
-          render status: error, json: @post.errors
+          render json: { sucess: false, errors: @post.errors }
         end
       end
 
       def destroy
         if @post.destroy
-          render status: :success, json: @post
+          render json: @post, serializer: PostSerializer
         else
-          render status: error, json: @post.errors
+          render json: { sucess: false, errors: @post.errors }
         end
       end
 
       private
 
       def post_params
-        params.require(:post).permit(:user_id, :name, :content, :public)
+        params.require(:post).permit(:name, :content, :public)
       end
 
       def set_post
         @post = Post.find(params[:id])
+      end
+
+      def correct_user?
+        return if current_api_v1_user == @post.user
+        render json: { success: false,
+                       error: 'アクセスする権利がありません' }
       end
 
     end
