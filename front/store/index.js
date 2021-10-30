@@ -1,15 +1,8 @@
-const cookieparser = process.server ? require('cookieparser') : undefined
+import Cookies from 'universal-cookie'
 
 export const actions = {
   nuxtClientInit ({ commit }) {
-    if (cookieparser !== undefined) {
-      const parsed = cookieparser
-      try {
-        const authFlag = parsed.uid
-        commit('authentication/setHeader', { header: parsed, authFlag })
-      } catch (err) {
-        // No valid cookie found
-      }
-    }
+    const cookies = new Cookies()
+    commit('authentication/setHeader', { headers: cookies })
   }
 }

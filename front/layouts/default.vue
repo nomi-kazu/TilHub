@@ -25,7 +25,7 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <v-list-item v-if="!isAuthenticated" link @click="logout">
+        <v-list-item v-if="isAuthenticated" link @click="logout">
           <v-list-item-action>
             <v-icon>mdi-account-cancel-outline</v-icon>
           </v-list-item-action>
@@ -87,8 +87,8 @@ export default {
   }),
 
   computed: {
-    isAuthenticated() {
-      return this.$store.getters["authentication/isAuthenticated"]
+    isAuthenticated () {
+      return this.$store.getters['authentication/isAuthenticated']
     }
   },
 
@@ -96,7 +96,7 @@ export default {
     async logout () {
       try {
         await this.$store.dispatch('authentication/logout')
-          
+
         this.$router.push('/user/login')
       } catch (e) {
         console.error(e)
