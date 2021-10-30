@@ -1,4 +1,5 @@
-const Cookie = process.client ? require('js-cookie') : undefined
+import Cookies from 'universal-cookie'
+const cookies = new Cookies()
 
 export const state = () => ({
   accessToken: null,
@@ -24,6 +25,7 @@ export const mutations = {
     state.id = null
     state.isAuthenticated = false
   },
+
   setUser (state, res) {
     state.accessToken = res.headers['access-token']
     state.client = res.headers.client
@@ -31,10 +33,12 @@ export const mutations = {
     state.id = res.data.data.id
     state.isAuthenticated = true
   },
-  setHeader (state, { header, authFlag }) {
-    state.accessToken = header['access-token']
-    state.client = header.client
-    state.uid = header.uid
+
+  setHeader (state, { headers, authFlag }) {
+    state.accessToken = headers['access-token']
+    state.client = headers.client
+    state.uid = headers.uid
+    state.id = headers.id
     state.isAuthenticated = authFlag
   }
 }
@@ -52,12 +56,9 @@ export const actions = {
       commit('setUser', res)
 
       // Cookieにセット
-      if (Cookie !== undefined) {
-        Cookie.set('access-token', getters.access_token)
-        Cookie.set('client', getters.client)
-        Cookie.set('uid', getters.uid)
-      }
-
+      cookies.set('access-token', getters.accessToken)
+      cookies.set('client', getters.client)
+      cookies.set('uid', getters.uid)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
@@ -67,31 +68,24 @@ export const actions = {
   },
 
   // ログアウト
-  async logout ({ commit }) {
+  async logout ({ commit, getters }) {
     try {
-      const accessToken = getters.accessToken
-      const client = getters.client
-      const uid = getters.uid
-
       await this.$axios.delete(
         '/api/v1/auth/sign_out',
         {
           headers: {
-            'access-token': accessToken,
-            client,
-            uid
+            'access-token': getters.accessToken,
+            client: getters.client,
+            uid: getters.uid
           }
         }
       )
 
       commit('clearUser')
 
-      if (Cookie !== undefined) {
-        Cookie.remove('access-token')
-        Cookie.remove('client')
-        Cookie.remove('uid')
-      }
-
+      cookies.remove('access-token')
+      cookies.remove('client')
+      cookies.remove('uid')
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')

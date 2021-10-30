@@ -8,14 +8,14 @@
 export default {
   computed: {
     accessToken () {
-      return this.$store.getters['authentication/access_token']
+      return this.$store.getters['authentication/accessToken']
     },
     isAuthenticated () {
       return this.$store.getters['authentication/isAuthenticated']
     },
     uid () {
       return this.$store.getters['authentication/uid']
-    },
+    }
   }
 }
 </script>

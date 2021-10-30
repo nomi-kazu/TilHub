@@ -1,8 +1,8 @@
 import Vuex from 'vuex'
 import axios from 'axios'
-import * as authentication from '~/store/authentication'
 import { createLocalVue } from '@vue/test-utils'
 import cloneDeep from 'lodash.clonedeep'
+import * as authentication from '~/store/authentication'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -88,7 +88,6 @@ describe('store/authentication.js', () => {
   })
 
   describe('actions', () => {
-
     beforeEach(() => {
       store.$axios = axios // @nuxtjs/axiosの代わりにaxiosを注入
       mockAxiosError = false // テストをする前に、falseに戻す
@@ -104,7 +103,7 @@ describe('store/authentication.js', () => {
         data: { data: { id: '1' } }
       }
 
-      await store.dispatch('login', { email: 'test@example.com', password: 'password'})
+      await store.dispatch('login', { email: 'test@example.com', password: 'password' })
 
       expect(store.getters.accessToken).toBe('5TbbNpg2JGQ-V__bsZW7Tp')
       expect(store.getters.client).toBe('MWwmbOyga_5G0B_a3hxOas')
@@ -115,27 +114,27 @@ describe('store/authentication.js', () => {
 
     it('loginできない(異常系:Internal Server Error)', async () => {
       mockAxiosError = true
-      mockAxiosGetResult= {
+      mockAxiosGetResult = {
         reponse: {
           status: 500
         }
       }
 
       await expect(
-        store.dispatch('login', { email: 'test@example.com', password: 'password'})
+        store.dispatch('login', { email: 'test@example.com', password: 'password' })
       ).rejects.toThrow('Internal Server Error')
     })
 
     it('loginできない(異常系:Bad credentials)', async () => {
       mockAxiosError = true
-      mockAxiosGetResult= {
+      mockAxiosGetResult = {
         response: {
           status: 401
         }
       }
 
       await expect(
-        store.dispatch('login', { email: 'test@example.com', password: 'password'})
+        store.dispatch('login', { email: 'test@example.com', password: 'password' })
       ).rejects.toThrow('Bad credentials')
     })
 
@@ -144,7 +143,7 @@ describe('store/authentication.js', () => {
         headers: {
           'access-token': '5TbbNpg2JGQ-V__bsZW7Tp',
           uid: 'test@example.com',
-          client: 'MWwmbOyga_5G0B_a3hxOas',
+          client: 'MWwmbOyga_5G0B_a3hxOas'
         },
         data: { data: { id: '1' } }
       }
@@ -165,7 +164,7 @@ describe('store/authentication.js', () => {
 
     it('logoutできない(異常系:Internal Server Error)', async () => {
       mockAxiosError = true
-      mockAxiosGetResult= {
+      mockAxiosGetResult = {
         reponse: {
           status: 500
         }
@@ -178,7 +177,7 @@ describe('store/authentication.js', () => {
 
     it('logoutできない(異常系:Bad credentials)', async () => {
       mockAxiosError = true
-      mockAxiosGetResult= {
+      mockAxiosGetResult = {
         response: {
           status: 401
         }

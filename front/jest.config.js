@@ -1,5 +1,5 @@
 module.exports = {
-  setupFiles: ['<rootDir>/test/jest.setup.js'],    // Load Mock setting
+  setupFiles: ['<rootDir>/test/jest.setup.js'], // Load Mock setting
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
