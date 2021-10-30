@@ -59,7 +59,6 @@ export const actions = {
       cookies.set('access-token', getters.accessToken)
       cookies.set('client', getters.client)
       cookies.set('uid', getters.uid)
-      cookies.set('id', getters.id)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
