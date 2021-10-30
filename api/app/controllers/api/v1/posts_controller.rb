@@ -30,7 +30,7 @@ module Api
         if @post.update(post_params)
           render status: :success, json: @post
         else
-          status: error, json: @post.errors
+          render status: error, json: @post.errors
         end
       end
 
