@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         omniauth_callbacks: 'api/v1/auth/omniauth_callbacks'
       }
     end
-    resources :posts
+    resources :posts, only: %i[show new create edit update destroy]
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
