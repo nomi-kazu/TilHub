@@ -1,6 +1,8 @@
 <template>
   <div>
     <p>ユーザー名：{{ username }}</p>
+
+    <UsernameIndexTemplate />
   </div>
 </template>
 

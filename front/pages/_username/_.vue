@@ -1,11 +1,12 @@
 <template>
   <div>
-    <SigninEnterusernameTemplate />
+    <UsernameFolderTemplate />
+    <UsernameFileTemplate />
   </div>
 </template>
 
 <script>
 export default {
-  middleware: 'authenticated'
+
 }
 </script>

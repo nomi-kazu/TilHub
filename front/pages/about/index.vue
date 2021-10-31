@@ -1,5 +1,5 @@
 <template>
-  <h1>今日学んだことを記録しよう!</h1>
+  <AboutIndexTemplate />
 </template>
 
 <script>

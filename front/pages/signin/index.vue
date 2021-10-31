@@ -1,5 +1,7 @@
 <template>
-  <h1>ログイン</h1>
+  <div>
+    <SigninTemplate />
+  </div>
 </template>
 
 <script>

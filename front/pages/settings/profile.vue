@@ -1,5 +1,7 @@
 <template>
-  <h1>プロフィール編集</h1>
+  <div>
+    <SettingProfileTemplate />
+  </div>
 </template>
 
 <script>
