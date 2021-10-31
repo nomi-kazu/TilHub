@@ -22,7 +22,7 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/html-self-closing': ['error', {
       'html': {
-        void: always
+        'void': 'always'
       }
     }]
   }
