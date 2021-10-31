@@ -1,5 +1,6 @@
 <template>
   <OneColumnContainer>
+    <ChangeUsernameCard />
   </OneColumnContainer>
 </template>
 
