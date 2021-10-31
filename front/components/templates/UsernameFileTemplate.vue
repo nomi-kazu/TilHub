@@ -1,10 +1,12 @@
 <template>
   <TwoColumnContainer :left-cols="8" :right-cols="4">
     <template #left>
-      <UserIntroCard />
+      <ViewFileCard />
     </template>
 
     <template #right>
+      <UserIntroCard />
+
       <FileFolderList />
     </template>
   </TwoColumnContainer>

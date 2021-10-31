@@ -1,9 +1,8 @@
 <template>
-  <ViewFileCard />
+  <BaseMarkdown />
 </template>
 
 <script>
 export default {
-
 }
 </script>
