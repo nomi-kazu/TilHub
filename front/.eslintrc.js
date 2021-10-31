@@ -10,19 +10,20 @@ module.exports = {
   },
   extends: [
     '@nuxtjs',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
+    'prettier'
   ],
   plugins: [
   ],
   // add your custom rules here
   rules: {
-    // 'semi': [2, 'never'],
-    // 'no-console': 'off',
-    // 'vue/max-attributes-per-line': 'off',
-    // 'vue/html-self-closing': ['error', {
-    //   'html': {
-    //     void: always
-    //   }
-    // }]
+    'semi': [2, 'never'],
+    'no-console': 'off',
+    'vue/max-attributes-per-line': 'off',
+    'vue/html-self-closing': ['error', {
+      'html': {
+        void: always
+      }
+    }]
   }
 }
