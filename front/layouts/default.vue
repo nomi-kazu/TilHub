@@ -1,8 +1,11 @@
 <template>
   <v-app id="inspire">
+    <TheHeader @click="onDrawer()" />
     <v-navigation-drawer
       v-model="drawer"
       app
+      fixed
+      clipped
     >
       <v-list dense>
         <nuxt-link to="/">
@@ -57,16 +60,6 @@
     </v-navigation-drawer>
 
     <v-card class="overflow-hidden header">
-      <v-app-bar
-        absolute
-        elevate-on-scroll
-        app
-        color="white"
-        scroll-target="#scrolling-techniques-7"
-      >
-        <v-app-bar-nav-icon @click="drawer = !drawer" />
-        <v-toolbar-title>Application</v-toolbar-title>
-      </v-app-bar>
       <v-sheet
         id="scrolling-techniques-7"
         class="overflow-y-auto"
@@ -83,7 +76,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: null
+    drawer: false
   }),
 
   computed: {
@@ -93,6 +86,10 @@ export default {
   },
 
   methods: {
+    onDrawer () {
+      this.drawer = !this.drawer
+    },
+  
     async logout () {
       try {
         await this.$store.dispatch('authentication/logout')
