@@ -1,10 +1,5 @@
 <template>
-  <v-icon>
+  <v-icon color="white">
     mdi-twitter
   </v-icon>
 </template>
-
-<script>
-export default {
-}
-</script>
