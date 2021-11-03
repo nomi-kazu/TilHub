@@ -3,9 +3,12 @@
     :dark="dark"
     :href="href"
     :to="to"
+    color="#171515"
+    class="white--text"
     @click="onClick"
   >
     <GithubIcon />
+    <slot />
   </v-btn>
 </template>
 
@@ -14,7 +17,7 @@ export default {
   props: {
     dark: {
       type: Boolean,
-      default: true
+      default: false
     },
     to: {
       type: [String, Object],
