@@ -3,6 +3,9 @@
   <v-text-field
     v-model="valueModel"
     label="パスワード"
+    counter
+    outlined
+    dense
     :rules="[rules.required, rules.min]"
     :type="showPassword ? 'text' : 'password'"
     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"

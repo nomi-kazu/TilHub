@@ -1,13 +1,17 @@
 <template>
   <OneColumnContainer>
-    <h1>新規登録</h1>
+    <h1 class="mb-7">新規登録</h1>
 
-    <SigninCard />
+    <SignupCard @signup="signup" />
   </OneColumnContainer>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    signup (userInfo) {
+      this.$emit('signup', userInfo)
+    }
+  }
 }
 </script>
