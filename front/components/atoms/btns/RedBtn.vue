@@ -3,6 +3,7 @@
     depressed
     color="red lighten-2"
     class="btn"
+    to="to"
   >
     <slot />
   </v-btn>
@@ -10,7 +11,12 @@
 
 <script>
 export default {
-
+  props: {
+    to: {
+      type: String,
+      default: '#'
+    }
+  }
 }
 </script>
 
