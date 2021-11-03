@@ -3,7 +3,7 @@
     depressed
     color="blue accent-4"
     class="btn"
-    to="to"
+    :to="to"
   >
     <slot />
   </v-btn>

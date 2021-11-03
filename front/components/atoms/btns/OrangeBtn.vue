@@ -3,7 +3,7 @@
     depressed
     color="yellow lighten-3"
     class="btn"
-    to="to"
+    :to="to"
   >
     <slot />
   </v-btn>
