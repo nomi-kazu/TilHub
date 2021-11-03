@@ -8,6 +8,7 @@
     @click="onClick"
   >
     <TwitterIcon />
+    <slot />
   </v-btn>
 </template>
 

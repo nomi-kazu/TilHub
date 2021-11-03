@@ -1,6 +1,6 @@
 <template>
   <OneColumnContainer>
-    <h1>ログイン</h1>
+    <h1 class="mb-8">ログイン</h1>
 
     <SigninCard />
   </OneColumnContainer>
@@ -11,3 +11,9 @@ export default {
 
 }
 </script>
+
+<style scoped>
+  h1 {
+    color: #646464;
+  }
+</style>

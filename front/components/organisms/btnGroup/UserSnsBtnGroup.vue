@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TwitterBtn fab :v-if="twitterLinkIsExists" />
-    <GithubBtn fab :v-if="githubLinkIsExists" />
+    <TwitterBtn v-if="twitterLinkIsExists" fab />
+    <GithubBtn v-if="githubLinkIsExists" fab />
   </div>
 </template>
 
