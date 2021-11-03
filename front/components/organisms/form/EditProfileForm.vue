@@ -22,6 +22,10 @@
       <p>出身</p>
       <v-text-field v-model="address" outlined dense />
     </div>
+
+    <div class="d-flex justify-center mt-5">
+      <OrangeBtn @click="save">保存する</OrangeBtn>
+    </div>
   </v-form>
 </template>
 
@@ -45,6 +49,20 @@ export default {
     this.profile = this.info.attributes.profile
     this.address = this.info.attributes.address
     console.log(this.info)
+  },
+
+  methods: {
+    async save () {
+      try {
+        await this.$axios.put('/api/v1/auth', {
+          name: this.name,
+          profile: this.profile,
+          address: this.address
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }
 </script>

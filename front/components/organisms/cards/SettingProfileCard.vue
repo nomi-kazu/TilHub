@@ -1,5 +1,5 @@
 <template>
-  <v-card width="800" class="mx-auto pt-10 pl-6">
+  <v-card width="800" class="mx-auto pt-10 pl-6 pb-8">
     <EditProfileForm :info="info" />
   </v-card>
 </template>
