@@ -3,24 +3,24 @@
     <div>
       <p>プロフィール画像</p>
       <div>
-        <v-img  src="https://picsum.photos/200/300?random" class="mr-2" />
+        <img src="https://picsum.photos/200/300?random" class="mr-2" />
         <PreviewImageFileInput />
       </div>
     </div>
 
     <div class="mb-8">
       <p>名前</p>
-      <v-text-field v-model="name" outlined dense />
+      <v-text-field v-model="user.name" outlined dense />
     </div>
 
     <div class="mb-8"> 
       <p>自己紹介</p>
-      <v-textarea v-model="profile" outlined height="80" />
+      <v-textarea v-model="user.profile" outlined height="80" />
     </div>
 
     <div class="mb-8">
       <p>出身</p>
-      <v-text-field v-model="address" outlined dense />
+      <v-text-field v-model="user.address" outlined dense />
     </div>
 
     <div class="d-flex justify-center mt-5">
@@ -30,6 +30,20 @@
 </template>
 
 <script>
+class UserInfo {
+  constructor () {
+    this.name = null
+    this.profile = null
+    this.address = null
+  }
+
+  infoToUserInfo (info) {
+    this.name = info && info.attributes && info.attributes.name
+    this.profile = info && info.attributes && info.attributes.profile
+    this.address = info && info.attributes && info.attributes.address
+  }
+}
+
 export default {
   props: {
     info: {
@@ -39,22 +53,16 @@ export default {
   },
 
   data: () => ({
-    name: undefined,
-    profile: undefined,
-    address: undefined
+    user: new UserInfo
   }),
 
   created () {
-    this.name = this.info.attributes.name
-    this.profile = this.info.attributes.profile
-    this.address = this.info.attributes.address
-    console.log(this.info)
+    this.user.infoToUserInfo(this.info)
   },
 
   methods: {
     onClick () {
-      const userInfo = { name: this.name, profile: this.profile, address: this.address }
-      this.$emit('save', userInfo)
+      this.$emit('save', this.user)
     }
   }
 }
@@ -65,7 +73,7 @@ export default {
   width: 80%;
   text-align: left;
 }
-.v-img {
+img {
   width: 45px;
   height: 45px;
   object-fit: cover;
