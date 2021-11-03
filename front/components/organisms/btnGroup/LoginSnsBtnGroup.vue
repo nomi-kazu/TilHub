@@ -1,6 +1,8 @@
 <template>
   <div>
-    <!-- snsのログインボタンをまとめる -->
+    <TwitterBtn>Twitter</TwitterBtn>
+    <GoogleBtn>Google</GoogleBtn>
+    <GithubBtn>Github</GithubBtn>
   </div>
 </template>
 
