@@ -2,7 +2,7 @@
   <OneColumnContainer>
     <h1>プロフィール編集</h1>
 
-    <SettingProfileCard :info="info" />
+    <SettingProfileCard :info="info" @save="save" />
   </OneColumnContainer>
 </template>
 
@@ -12,6 +12,12 @@ export default {
     info: {
       type: Object,
       default: undefined
+    }
+  },
+
+  methods: {
+    save (userInfo) {
+      this.$emit('save', userInfo)
     }
   }
 }

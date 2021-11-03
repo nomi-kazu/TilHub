@@ -24,7 +24,7 @@
     </div>
 
     <div class="d-flex justify-center mt-5">
-      <OrangeBtn @click="save">保存する</OrangeBtn>
+      <OrangeBtn @click="onClick">保存する</OrangeBtn>
     </div>
   </v-form>
 </template>
@@ -52,16 +52,9 @@ export default {
   },
 
   methods: {
-    async save () {
-      try {
-        await this.$axios.put('/api/v1/auth', {
-          name: this.name,
-          profile: this.profile,
-          address: this.address
-        })
-      } catch (e) {
-        console.error(e)
-      }
+    onClick () {
+      const userInfo = { name: this.name, profile: this.profile, address: this.address }
+      this.$emit('save', userInfo)
     }
   }
 }
