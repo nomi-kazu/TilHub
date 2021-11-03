@@ -2,7 +2,7 @@ import { pascalCase } from '~/utils/string'
 import { getSidebarJson } from '~/src/models/sidebarModel'
 
 /**
- * sibebar.jsonから必要なデータを取得する
+ * sidebar.jsonから必要なデータを取得する
  *
  * @param { String } name
  * @returns { Object[] }
@@ -17,7 +17,7 @@ export const getDatas = (name) => {
  *
  * event が logout の場合は LogoutSidebarListItem を返す
  *
- * evnet がない場合は BaseSidebarListItemを返す
+ * event がない場合は BaseSidebarListItemを返す
  *
  * @param { Object } data
  * @returns { String }
