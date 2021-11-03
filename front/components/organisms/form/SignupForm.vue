@@ -4,9 +4,11 @@
     <PasswordTextField :value="password" @input="setPasswordValue" />
     <p class="mb-6">※半角英数字のみ使用可能です</p>
 
+  <div class="text-center">
     <OrangeBtn type="submit" :disabled="!isValid" @click="onClick">
       新規登録
     </OrangeBtn>
+  </div>
   </v-form>
 </template>
 

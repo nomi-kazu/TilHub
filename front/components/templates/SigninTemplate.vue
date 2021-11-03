@@ -1,6 +1,6 @@
 <template>
   <OneColumnContainer>
-    <h1 class="mb-8">ログイン</h1>
+    <h1 class="mb-8 text-center">ログイン</h1>
 
     <SigninCard />
   </OneColumnContainer>

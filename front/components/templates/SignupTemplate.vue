@@ -1,6 +1,6 @@
 <template>
   <OneColumnContainer>
-    <h1 class="mb-7">新規登録</h1>
+    <h1 class="mb-7 text-center">新規登録</h1>
 
     <SignupCard @signup="signup" />
   </OneColumnContainer>
