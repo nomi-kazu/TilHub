@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <EditProfileForm />
+    <UserSnsBtnGroup />
   </v-card>
 </template>
 
