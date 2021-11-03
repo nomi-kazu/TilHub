@@ -27,13 +27,11 @@
 
 <script>
 export default {
-  data: () => {
-    return {
-      userName: undefined,
-      selfIntroduction: undefined,
-      from: undefined
-    }
-  },
+  data: () => ({
+    userName: undefined,
+    selfIntroduction: undefined,
+    from: undefined
+  }),
 
   created() {
     // フォームに初期値を入れる

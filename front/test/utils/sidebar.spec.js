@@ -1,17 +1,17 @@
-import * as sidebarservice from '~/src/services/sidebarservice'
+import * as sidebarService from '~/src/services/sidebarService'
 import sidebar from '~/assets/json/sidebar'
 import * as sidebarModel from '~/src/models/sidebarModel'
 
 describe('utils/sidebar', () => {
   describe('getDatas', () => {
     it('jsonからデータを取得できる(guest)', () => {
-      expect(sidebarservice.getDatas('guest')).toBeDefined()
-      expect(sidebarservice.getDatas('guest')).toHaveLength(sidebar.data.guest.length)
+      expect(sidebarService.getDatas('guest')).toBeDefined()
+      expect(sidebarService.getDatas('guest')).toHaveLength(sidebar.data.guest.length)
     })
 
     it('jsonからデータを取得できる(login)', () => {
-      expect(sidebarservice.getDatas('login')).toBeDefined()
-      expect(sidebarservice.getDatas('login')).toHaveLength(sidebar.data.login.length)
+      expect(sidebarService.getDatas('login')).toBeDefined()
+      expect(sidebarService.getDatas('login')).toHaveLength(sidebar.data.login.length)
     })
   })
 
@@ -36,7 +36,7 @@ describe('utils/sidebar', () => {
         }
       })
 
-      const received = sidebarservice.importComponents('guest')
+      const received = sidebarService.importComponents('guest')
       expect(received).toBeDefined()
       expect(received).toBeInstanceOf(Object)
       expect(received).toHaveProperty('BaseSidebarListItem')
@@ -61,7 +61,7 @@ describe('utils/sidebar', () => {
         }
       })
 
-      const received = sidebarservice.importComponents('guest')
+      const received = sidebarService.importComponents('guest')
       expect(received).toBeDefined()
       expect(received).toBeInstanceOf(Object)
       expect(received).toHaveProperty('BaseSidebarListItem')
