@@ -1,10 +1,12 @@
 <template>
   <v-btn
+    color="#DB4A39"
+    class="white--text"
     :dark="dark"
     :href="href"
     :to="to"
-    color="#DB4A39"
-    class="white--text"
+    :fab="fab"
+    :x-small="xSmall"
     @click="onClick"
   >
     <GoogleIcon />
@@ -26,6 +28,16 @@ export default {
     href: {
       type: String,
       default: undefined
+    },
+    fab: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  computed: {
+    xSmall () {
+      return this.fab
     }
   },
 
