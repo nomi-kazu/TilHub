@@ -1,6 +1,12 @@
 <template>
   <!-- validationの処理 -->
-  <v-text-field v-model="valueModel" />
+  <v-text-field 
+    v-model="valueModel"
+    label="メール"
+    outlined
+    dense
+    :rules="[rules.required]"
+  />
 </template>
 
 <script>
@@ -9,6 +15,16 @@ export default {
     value: {
       type: String,
       default: undefined
+    }
+  },
+
+  data: () => {
+    return {
+      rules: {
+        required: (value) => {
+          return !!value || '入力してください'
+        }
+      }
     }
   },
 
