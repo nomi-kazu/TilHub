@@ -1,11 +1,9 @@
 <template>
-  <v-card width="800" height="300" class="mx-auto">
-    <v-row class="d-flex flex-row justify-center align-center">
-      <div class="mr-10">
-        <SigninForm />
-      </div>
+  <v-card max-width="800" height="400" class="mx-auto pt-4">
+    <v-row justify="center">
+      <SigninForm class="mr-1 mr-md-6 mr-lg-10" />
 
-      <div class="ml-10">
+      <div class="ml-1 mr-md-6 mr-lg-10">
         <p>その他のアカウント</p>
         <LoginSnsBtnGroup />
       </div>
