@@ -19,7 +19,7 @@ module Api
         if @post.save
           render json: @post, serializer: PostSerializer
         else
-          render json: { success: false, errors: @post.errors }
+          render json: { status: 'error', errors: @post.errors }
         end
       end
 
@@ -31,7 +31,7 @@ module Api
         if @post.update(post_params)
           render json: @post, serializer: PostSerializer
         else
-          render json: { sucess: false, errors: @post.errors }
+          render json: { status: 'error', errors: @post.errors }
         end
       end
 
@@ -39,7 +39,7 @@ module Api
         if @post.destroy
           render json: @post, serializer: PostSerializer
         else
-          render json: { sucess: false, errors: @post.errors }
+          render json: { status: 'error', errors: @post.errors }
         end
       end
 
@@ -56,7 +56,7 @@ module Api
       def correct_user?
         return if current_api_v1_user == @post.user
         render json: { success: false,
-                       error: 'アクセスする権利がありません' }
+                       errors: 'アクセスする権限がありません' }
       end
 
     end
