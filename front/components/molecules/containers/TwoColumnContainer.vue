@@ -1,6 +1,6 @@
 <template>
   <BaseContainer>
-    <v-row justify="center">
+    <v-row :justify="justify">
       <v-col :cols="leftCols">
         <slot name="left" />
       </v-col>
@@ -23,6 +23,11 @@ export default {
     rightCols: {
       type: Number,
       default: 4
+    },
+
+    justify: {
+      type: String,
+      default: 'center'
     }
   }
 }

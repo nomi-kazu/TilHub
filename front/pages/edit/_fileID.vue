@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>ファイル名：{{ fileID }}</p>
-
     <EditFileidSBothTemplate v-if="isBoth" />
 
     <EditFileidSEditTemplate v-if="isEdit" />
