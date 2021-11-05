@@ -32,7 +32,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/nuxt-client-init.js',
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/vue-mavon-editor.client.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
