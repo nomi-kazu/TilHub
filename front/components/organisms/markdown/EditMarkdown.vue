@@ -6,7 +6,7 @@
         font-size="16px"
         language="ja"
         :default-open="defaultOpen"
-        :subfield="subfield"
+        :subfield="vSubfield"
         :toobars="markdownOption"
         @save="onSave"
       />
@@ -15,6 +15,68 @@
 </template>
 
 <script>
+const desktopOption = {
+  bold: true,
+  italic: true,
+  header: true,
+  underline: true,
+  strikethrough: true,
+  mark: true,
+  superscript: true,
+  subscript: true,
+  quote: true,
+  ol: true,
+  ul: true,
+  link: true,
+  imagelink: false /** 画像 */,
+  code: true,
+  table: true,
+  readmodel: true,
+  htmlcode: true,
+  help: true,
+  undo: true,
+  redo: true,
+  trash: true,
+  save: true,
+  navigation: true,
+  alignleft: true,
+  aligncenter: true,
+  alignright: true,
+  subfield: true,
+  preview: true
+}
+
+const mobileOption = {
+  bold: true,
+  italic: true,
+  header: true,
+  underline: true,
+  strikethrough: true,
+  mark: true,
+  superscript: true,
+  subscript: true,
+  quote: true,
+  ol: true,
+  ul: true,
+  link: true,
+  imagelink: false /** 画像 */,
+  code: true,
+  table: true,
+  readmodel: false,
+  htmlcode: false,
+  help: true,
+  undo: true,
+  redo: true,
+  trash: false,
+  save: false,
+  navigation: true,
+  alignleft: true,
+  aligncenter: true,
+  alignright: true,
+  subfield: false,
+  preview: true
+}
+
 export default {
   props: {
     value: {
@@ -35,36 +97,7 @@ export default {
 
   data () {
     return {
-      markdownOption: {
-        bold: true,
-        italic: true,
-        header: true,
-        underline: true,
-        strikethrough: true,
-        mark: true,
-        superscript: true,
-        subscript: true,
-        quote: true,
-        ol: true,
-        ul: true,
-        link: true,
-        imagelink: false /** 画像 */,
-        code: true,
-        table: true,
-        readmodel: true,
-        htmlcode: true,
-        help: true,
-        undo: true,
-        redo: true,
-        trash: true,
-        save: true,
-        navigation: true,
-        alignleft: true,
-        aligncenter: true,
-        alignright: true,
-        subfield: true,
-        preview: true
-      }
+      markdownOption: this.$device.isDesktopOrTablet ? desktopOption : mobileOption
     }
   },
 
@@ -87,10 +120,14 @@ export default {
       }
     },
 
-    methods: {
-      onSave () {
-        return this.$emit('save')
-      }
+    vSubfield () {
+      return this.$device.isDesktopOrTablet ? this.subfield : false
+    }
+  },
+
+  methods: {
+    onSave () {
+      return this.$emit('save')
     }
   }
 }

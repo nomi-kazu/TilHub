@@ -56,7 +56,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
+    '@nuxtjs/device',
     '@nuxtjs/style-resources'
   ],
 

@@ -13,8 +13,8 @@
     "test": "jest --config jest.config.js"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/device": "^2.1.0",
     "core-js": "^3.15.1",
     "mavon-editor": "^2.9.1",
     "nuxt": "^2.15.7",
