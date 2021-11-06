@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form  class="pos-relative">
     <UsernameTextField />
     <!-- orange-btnを使う。そのため、orange-btnのpropsにfabを追加する -->
     <v-btn
