@@ -1,6 +1,6 @@
 <template>
   <OneColumnContainer class="pos-relative" fluid>
-    <EditMarkdown v-model="md" :is-view="isView" :subfield="isBoth" @save="post" />
+    <EditMarkdown v-model="md" :fileid="fileid" :is-view="isView" :subfield="isBoth" @save="post" />
 
     <BlueBtn class="post-btn" large @click="post">
       投稿する

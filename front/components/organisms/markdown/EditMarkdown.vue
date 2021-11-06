@@ -8,6 +8,8 @@
         :default-open="defaultOpen"
         :subfield="vSubfield"
         :toobars="markdownOption"
+        @subfieldToggle="onSubfieldToggle"
+        @previewToggle="onPreviewToggle"
         @save="onSave"
       />
     </client-only>
@@ -89,6 +91,11 @@ export default {
       default: true
     },
 
+    fileid: {
+      type: String,
+      required: true
+    },
+
     subfield: {
       type: Boolean,
       default: true
@@ -128,6 +135,18 @@ export default {
   methods: {
     onSave () {
       return this.$emit('save')
+    },
+
+    onPreviewToggle (status) {
+      return this.$router.push({ path: `/edit/${this.fileid}`, query: {
+        status: status ? 'view' : 'edit'
+      }})
+    },
+
+    onSubfieldToggle () {
+      return this.$router.push({ path: `/edit/${this.fileid}`, query: {
+        status: 'both'
+      }})
     }
   }
 }
