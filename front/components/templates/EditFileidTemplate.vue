@@ -2,9 +2,15 @@
   <OneColumnContainer class="pos-relative" fluid>
     <EditMarkdown v-model="md" :fileid="fileid" :is-view="isView" :subfield="isBoth" @save="post" />
 
-    <BlueBtn class="post-btn" large @click="post">
-      投稿する
-    </BlueBtn>
+    <div :class="{ 'text-right': !$device.isDesktopOrTablet }">
+      <BlueBtn
+        :class="{ 'post-btn' : $device.isDesktopOrTablet  }"
+        large
+        @click="post"
+      >
+        投稿する
+      </BlueBtn>
+    </div>
   </OneColumnContainer>
 </template>
 
