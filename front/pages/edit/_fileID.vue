@@ -50,7 +50,7 @@ Start numbering with offset:
 [TilHub github](https://github.com/nomi-kazu/TilHub)
 `
 
-const DEFALUT_STATUS = 'both'
+const DEFAULTSTATUS = 'both'
 
 export default {
   middleware: 'authenticated',
@@ -65,7 +65,7 @@ export default {
     },
 
     defaultStatus () {
-      return DEFALUT_STATUS
+      return DEFAULTSTATUS
     },
 
     isBoth () {
@@ -77,13 +77,13 @@ export default {
     isEdit () {
       const LABEL = 'edit'
       const status = this.$route.query.status
-      return status ? status === LABEL : this.defalutStatus === LABEL
+      return status ? status === LABEL : this.defaultStatus === LABEL
     },
 
     isView () {
       const LABEL = 'view'
       const status = this.$route.query.status
-      return status ? status === LABEL : this.defalutStatus === LABEL
+      return status ? status === LABEL : this.defaultStatus === LABEL
     }
   },
 
