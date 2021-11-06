@@ -4,6 +4,7 @@
     color="yellow lighten-3"
     class="btn"
     :to="to"
+    :large="large"
     :disabled="disabled"
     @click="onClick"
   >
@@ -15,8 +16,12 @@
 export default {
   props: {
     to: {
-      type: String,
-      default: '#'
+      type: [String, Object],
+      default: undefined
+    },
+    large: {
+      type: Boolean,
+      default: false
     },
     disabled: {
       type: Boolean,

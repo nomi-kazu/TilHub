@@ -5,6 +5,7 @@
     class="btn"
     :to="to"
     :large="large"
+    :disabled="disabled"
     @click="onClick"
   >
     <slot />
@@ -16,10 +17,15 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      default: '#'
+      default: undefined
     },
 
     large: {
+      type: Boolean,
+      default: false
+    },
+
+    disabled: {
       type: Boolean,
       default: false
     }
