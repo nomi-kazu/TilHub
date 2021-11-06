@@ -5,7 +5,10 @@
         v-model="md"
         font-size="16px"
         language="ja"
+        :default-open="defaultOpen"
+        :subfield="subfield"
         :toobars="markdownOption"
+        @save="onSave"
       />
     </client-only>
   </div>
@@ -17,6 +20,16 @@ export default {
     value: {
       type: String,
       default: undefined
+    },
+
+    isView: {
+      type: Boolean,
+      default: true
+    },
+
+    subfield: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -38,7 +51,6 @@ export default {
         imagelink: false /** 画像 */,
         code: true,
         table: true,
-        fullscreen: true,
         readmodel: true,
         htmlcode: true,
         help: true,
@@ -57,12 +69,27 @@ export default {
   },
 
   computed: {
+    defaultOpen () {
+      if (this.subfield) {
+        return 'preview'
+      }
+
+      return this.isView ? 'preview' : 'edit'
+    },
+
     md: {
-      get() {
+      get () {
         return this.value
       },
-      set(newVal) {
+
+      set (newVal) {
         return this.$emit('input', newVal)
+      }
+    },
+
+    methods: {
+      onSave () {
+        return this.$emit('save')
       }
     }
   }

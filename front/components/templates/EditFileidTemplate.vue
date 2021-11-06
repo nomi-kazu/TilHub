@@ -1,6 +1,6 @@
 <template>
   <OneColumnContainer class="pos-relative" fluid>
-    <EditMarkdown v-model="md" />
+    <EditMarkdown v-model="md" :is-view="isView" :subfield="isBoth" @save="post" />
 
     <BlueBtn class="post-btn" large @click="post">
       投稿する
@@ -15,18 +15,34 @@ export default {
       type: String,
       required: true
     },
+
     value: {
       type: String,
       default: undefined
+    },
+
+    isBoth: {
+      type: Boolean,
+      default: false
+    },
+
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+
+    isView: {
+      type: Boolean,
+      default: false
     }
   },
 
   computed: {
     md: {
-      get() {
+      get () {
         return this.value
       },
-      set(newVal) {
+      set (newVal) {
         return this.$emit('input', newVal)
       }
     }

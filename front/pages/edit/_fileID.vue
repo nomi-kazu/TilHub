@@ -1,6 +1,13 @@
 <template>
   <div>
-    <EditFileidTemplate v-model="markdown" :fileid="fileID" @post="post" />
+    <EditFileidTemplate
+      v-model="markdown"
+      :fileid="fileID"
+      :is-both="isBoth"
+      :is-edit="isEdit"
+      :is-view="isView"
+      @post="post"
+    />
   </div>
 </template>
 
