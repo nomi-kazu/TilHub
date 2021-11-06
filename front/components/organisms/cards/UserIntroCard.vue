@@ -1,17 +1,19 @@
 <template>
-  <v-card>
+  <v-card max-width="355px" class="text-center pt-4">
     <div>
-      <v-img src="https://picsum.photos/510/300?random" class="user-icon" />
-    </div>
+      <div>
+        <v-img src="https://picsum.photos/510/300?random" class="user-icon" />
+      </div>
 
-    <p class="name">{{ userInfo.attributes.name }}</p>
+      <p class="name">{{ getName }}</p>
 
-    <p class="profile">{{ userInfo.attributes.profile }}</p>
+      <p class="profile">{{ getProfile }}</p>
 
-    <div>
-      <p>FROM: {{ userInfo.attributes.address }}</p>
+      <div class="mt-3">
+        <p>FROM: {{ getAddress }}</p>
 
-      <UserSnsBtnGroup />
+        <UserSnsBtnGroup />
+      </div>
     </div>
   </v-card>
 </template>
@@ -23,16 +25,31 @@ export default {
       type: Object,
       default: undefined
     }
+  },
+
+  computed: {
+    getName () {
+      return this.userInfo.attributes && this.userInfo.attributes.name
+    },
+
+    getProfile () {
+      return this.userInfo.attributes && this.userInfo.attributes.profile
+    },
+
+    getAddress () {
+      return this.userInfo.attributes && this.userInfo.attributes.address
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .user-icon {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 50%;
+  margin: 0 auto;
 }
 
 .name {
@@ -42,5 +59,6 @@ export default {
 
 .profile {
   width: 80%;
+  margin: 0 auto;
 }
 </style>
