@@ -4,7 +4,9 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue',
-    '<rootDir>/store/**/*.js'
+    '<rootDir>/src/**/*.js',
+    '<rootDir>/store/**/*.js',
+    '<rootDir>/utils/**/*.js'
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',

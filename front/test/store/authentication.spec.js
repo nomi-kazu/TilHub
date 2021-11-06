@@ -47,7 +47,7 @@ describe('store/authentication.js', () => {
         client: 'MWwmbOyga_5G0B_a3hxOas'
       }
 
-      store.commit('setHeader', { headers: parsedCookie, authFlag: true })
+      store.commit('setHeader', { headers: parsedCookie })
 
       expect(store.getters.accessToken).toBe('5TbbNpg2JGQ-V__bsZW7Tp')
       expect(store.getters.client).toBe('MWwmbOyga_5G0B_a3hxOas')
