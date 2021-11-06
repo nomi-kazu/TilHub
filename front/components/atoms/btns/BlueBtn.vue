@@ -4,6 +4,8 @@
     color="blue accent-4"
     class="btn"
     :to="to"
+    :large="large"
+    @click="onClick"
   >
     <slot />
   </v-btn>
@@ -13,8 +15,19 @@
 export default {
   props: {
     to: {
-      type: String,
+      type: [String, Object],
       default: '#'
+    },
+
+    large: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  methods: {
+    onClick () {
+      return this.$emit('click')
     }
   }
 }

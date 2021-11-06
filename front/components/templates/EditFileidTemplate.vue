@@ -1,6 +1,10 @@
 <template>
-  <OneColumnContainer fluid>
+  <OneColumnContainer class="pos-relative" fluid>
     <EditMarkdown v-model="md" />
+
+    <BlueBtn class="post-btn" large @click="post">
+      投稿する
+    </BlueBtn>
   </OneColumnContainer>
 </template>
 
@@ -16,6 +20,7 @@ export default {
       default: undefined
     }
   },
+
   computed: {
     md: {
       get() {
@@ -25,6 +30,20 @@ export default {
         return this.$emit('input', newVal)
       }
     }
+  },
+
+  methods: {
+    post () {
+      return this.$emit('post')
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.post-btn {
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+}
+</style>
