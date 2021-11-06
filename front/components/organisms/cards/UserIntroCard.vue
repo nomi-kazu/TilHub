@@ -1,13 +1,15 @@
 <template>
   <v-card>
-    <!-- TODO: 画像-->
+    <div>
+      <v-img src="https://picsum.photos/510/300?random" class="user-icon" />
+    </div>
 
-    <!-- TODO: ユーザー名 -->
+    <p class="name">{{ userInfo.attributes.name }}</p>
 
-    <!-- TODO: ユーザーのコメント -->
+    <p class="profile">{{ userInfo.attributes.profile }}</p>
 
     <div>
-      <!-- TODO: From hogehoge -->
+      <p>{{ userInfo.attributes.address }}</p>
 
       <UserSnsBtnGroup />
     </div>
@@ -16,6 +18,29 @@
 
 <script>
 export default {
-
+  props: {
+    userInfo: {
+      type: Object,
+      default: undefined
+    }
+  }
 }
 </script>
+
+<style scoped>
+.user-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.profile {
+  width: 80%;
+}
+</style>

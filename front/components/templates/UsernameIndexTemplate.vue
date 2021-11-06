@@ -1,7 +1,7 @@
 <template>
-  <TwoColumnContainer>
+  <TwoColumnContainer left-cols="4" right-cols="6">
     <template #left>
-      <UserIntroCard />
+      <UserIntroCard :user-info="userInfo" />
     </template>
 
     <template #right>
@@ -16,6 +16,11 @@
 
 <script>
 export default {
-
+  props: {
+    userInfo: {
+      type: Object,
+      default: undefined
+    }
+  }
 }
 </script>
