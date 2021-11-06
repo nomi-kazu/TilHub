@@ -2,8 +2,10 @@
   <v-form>
     <div>
       <p>プロフィール画像</p>
-      <div>
-        <img src="https://picsum.photos/200/300?random" class="mr-2" />
+      <div class="d-flex align-center">
+        <div class="mr-2">
+          <img src="https://picsum.photos/200/300?random" class="user-icon" />
+        </div>
         <PreviewImageFileInput />
       </div>
     </div>
@@ -68,12 +70,8 @@ export default {
 }
 </script>
 
-<style>
-.v-form {
-  width: 80%;
-  text-align: left;
-}
-img {
+<style lang="scss" scoped>
+.user-icon {
   width: 45px;
   height: 45px;
   object-fit: cover;

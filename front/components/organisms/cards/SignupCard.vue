@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto pt-4" max-width="800" height="400">
-    <v-row justify="center">
+    <v-row justify="center" class="w-100 h-100">
       <SignupForm class="mr-1 mr-md-6 mr-lg-10" @signup="signup" />
 
       <div class="ml-1 ml-md-6 ml-lg-10">
@@ -20,10 +20,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .row {
-    width: 100%;
-    height: 100%;
-  }
-</style>
