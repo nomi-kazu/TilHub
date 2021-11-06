@@ -42,7 +42,7 @@ export default {
 
     leftMd: {
       type: [Boolean, String, Number],
-      default: 12
+      default: false
     },
 
     leftLg: {
@@ -67,7 +67,7 @@ export default {
 
     rightMd: {
       type: [Boolean, String, Number],
-      default: 12
+      default: false
     },
     
     rightLg: {
