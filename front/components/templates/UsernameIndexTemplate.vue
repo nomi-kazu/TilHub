@@ -1,11 +1,11 @@
 <template>
-  <TwoColumnContainer>
+  <TwoColumnContainer :left-cols="4" :right-cols="6">
     <template #left>
-      <UserIntroCard />
+      <UserIntroCard :user-info="userInfo" class="mt-10" />
     </template>
 
     <template #right>
-      <h2>あなたのリポジトリ</h2>
+      <h2 class="text-center">あなたのリポジトリ</h2>
 
       <FolderBreadcrumbs />
 
@@ -16,6 +16,11 @@
 
 <script>
 export default {
-
+  props: {
+    userInfo: {
+      type: Object,
+      default: undefined
+    }
+  }
 }
 </script>

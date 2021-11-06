@@ -5,7 +5,8 @@ export const state = () => ({
   accessToken: null,
   client: null,
   uid: null,
-  id: null
+  id: null,
+  username: null
 })
 
 export const getters = {
@@ -13,6 +14,7 @@ export const getters = {
   client: state => state.client,
   uid: state => state.uid,
   id: state => state.id,
+  username: (state) => state.username,
   isAuthenticated: state => !!state.uid
 }
 
@@ -22,6 +24,7 @@ export const mutations = {
     state.client = null
     state.uid = null
     state.id = null
+    state.username = null
   },
 
   setUser (state, res) {
@@ -29,12 +32,15 @@ export const mutations = {
     state.client = res.headers.client
     state.uid = res.headers.uid
     state.id = res.data.data.id
+    state.username = res.data.data.attributes.username
   },
 
   setHeader (state, { headers }) {
     state.accessToken = headers['access-token']
     state.client = headers.client
     state.uid = headers.uid
+    state.id = headers.id
+    state.username = headers.username
   }
 }
 
@@ -53,7 +59,9 @@ export const actions = {
       // Cookieにセット
       cookies.set('access-token', getters.accessToken)
       cookies.set('client', getters.client)
+      cookies.set('id', getters.id)
       cookies.set('uid', getters.uid)
+      cookies.set('username', getters.username)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
@@ -80,7 +88,9 @@ export const actions = {
 
       cookies.remove('access-token')
       cookies.remove('client')
+      cookies.remove('id')
       cookies.remove('uid')
+      cookies.remove('username')
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
