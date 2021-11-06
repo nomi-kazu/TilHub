@@ -1,6 +1,6 @@
 <template>
   <OneColumnContainer class="pos-relative" fluid>
-    <EditMarkdown v-model="md" :fileid="fileid" :is-view="isView" :subfield="isBoth" @save="post" />
+    <EditMarkdown v-model="md" :fileid="fileid" :is-view="isView" :subfield="isBoth" @post="post" />
 
     <div :class="{ 'text-right': !$device.isDesktopOrTablet }">
       <BlueBtn
