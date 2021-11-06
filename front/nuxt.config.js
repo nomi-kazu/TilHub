@@ -33,7 +33,7 @@ export default {
   plugins: [
     '~/plugins/nuxt-client-init.js',
     '~/plugins/axios',
-    '~/plugins/vue-mavon-editor.client.js',
+    '~/plugins/vue-mavon-editor.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
