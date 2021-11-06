@@ -58,5 +58,6 @@ DeviseTokenAuth.setup do |config|
   # send email, set it to true. (This is a setting for compatibility)
   # config.send_confirmation_email = true
   config.default_confirm_success_url = 'confirmed'
-  config.default_confirm_success_url = 'localhost:8080/signup/enter-user-name' if Rails.env.development?
+  dev_domain = ENV['DEV_DOMAIN'] ||= 'http://localhost:8080'
+  config.default_confirm_success_url = dev_domain + '/signup/enter-user-name' if Rails.env.development?
 end
