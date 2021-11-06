@@ -49,15 +49,15 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/device',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/device'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -82,7 +82,10 @@ export default {
     }
   },
   styleResources: {
-    scss: ['~/assets/scss/variables.scss']
+    scss: [
+      '~/assets/scss/variables.scss',
+      '~/assets/scss/functions/**.scss'
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
