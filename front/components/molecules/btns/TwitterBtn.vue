@@ -11,7 +11,7 @@
     :x-small="xSmall"
     @click="onClick"
   >
-    <TwitterIcon class="mr-2" />
+    <TwitterIcon />
     <slot />
   </v-btn>
 </template>
