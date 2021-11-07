@@ -46,7 +46,7 @@ module Api
       private
 
       def post_params
-        params.require(:post).permit(:name, :content, :public)
+        params.require(:post).permit(:name, :content, :public, :user_id, :folder_id)
       end
 
       def set_post

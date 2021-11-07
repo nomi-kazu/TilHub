@@ -4,4 +4,5 @@ class Post < ApplicationRecord
   validates :public, inclusion: { in: [true, false] }
 
   belongs_to :user
+  belongs_to :folder, optional: true
 end
