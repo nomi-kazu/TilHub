@@ -9,11 +9,6 @@ module Api
         render json: @folder, serializer: FolderSerializer
       end
 
-      def new
-        @folder = Folder.new
-        render json: @folder, serializer: FolderSerializer
-      end
-
       def create
         @folder = current_api_v1_user.folders.build(folder_params)
         if @folder.save
@@ -21,10 +16,6 @@ module Api
         else
           render json: { status: 'error', errors: @folder.errors }
         end
-      end
-
-      def edit
-        render json: @folder, serializer: FolderSerializer
       end
 
       def update
