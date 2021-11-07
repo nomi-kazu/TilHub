@@ -15,7 +15,9 @@ module Api
       end
 
       def create
-        @post = current_api_v1_user.posts.build(post_params)
+        @folder = Folder.find_by(id: params[:folder_id])
+        @post = current_api_v1_user.posts.build(post_params) if @folder.nil?
+        @post = @folder.posts.build(post_params) unless @folder.nil?
         if @post.save
           render json: @post, serializer: PostSerializer
         else
@@ -46,7 +48,7 @@ module Api
       private
 
       def post_params
-        params.require(:post).permit(:name, :content, :public)
+        params.require(:post).permit(:name, :content, :public, :user_id, :folder_id)
       end
 
       def set_post
