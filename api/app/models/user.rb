@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :folders, dependent: :destroy
 
+  has_one_attached :avatar
+
   VALID_USERNAME_REGEX = /\A[\w_]+\z/i
   VALID_PASSWORD_REGEX = /\A[!-~]+\z/
 

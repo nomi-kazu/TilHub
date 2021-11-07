@@ -8,6 +8,11 @@ module Api
           render json: current_api_v1_user, serializer: UserSerializer
         end
 
+        def update
+          super
+          current_api_v1_user.avatar.attach(params[:avatar]) if params[:avatar]
+        end
+
         private
 
         # ストロングパラメーター設定
@@ -16,7 +21,7 @@ module Api
         end
 
         def account_update_params
-          params.permit(:name, :username, :image, :profile, :address)
+          params.permit(:name, :username, :image, :profile, :address, :avatar)
         end
 
         def render_create_success
