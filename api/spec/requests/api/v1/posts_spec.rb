@@ -5,15 +5,34 @@ RSpec.describe 'Api::V1::Posts', type: :request do
     subject(:call_api){ get "/api/v1/posts/#{post.id}" }
 
     let(:user) { create(:confirmed_user) }
-    let(:post) { create :post, user_id: user.id }
 
-    it 'レスポンスボディーに期待された値が返ること' do
-      call_api
-      res = JSON.parse(response.body)
-      expect(res['data']['attributes']['name']).to eq 'test'
-      expect(res['data']['attributes']['content']).to eq 'example'
-      expect(res['data']['attributes']['public']).to eq false
-      expect(res['data']['attributes']['user-id']).to eq user.id
+    context 'folderが存在している場合' do
+      let(:folder) { create :folder, user_id: user.id }
+      let(:post) { create :post, user_id: user.id, folder_id: folder.id }
+
+      it 'レスポンスボディーに期待された値が返ること' do
+        call_api
+        res = JSON.parse(response.body)
+        expect(res['data']['attributes']['name']).to eq 'test'
+        expect(res['data']['attributes']['content']).to eq 'example'
+        expect(res['data']['attributes']['public']).to eq false
+        expect(res['data']['attributes']['user-id']).to eq user.id
+        expect(res['data']['attributes']['folder-id']).to eq folder.id
+      end
+    end
+
+    context 'folderが存在していない場合' do
+      let(:post) { create :post, user_id: user.id, folder_id: nil }
+
+      it 'レスポンスボディーに期待された値が返ること' do
+        call_api
+        res = JSON.parse(response.body)
+        expect(res['data']['attributes']['name']).to eq 'test'
+        expect(res['data']['attributes']['content']).to eq 'example'
+        expect(res['data']['attributes']['public']).to eq false
+        expect(res['data']['attributes']['user-id']).to eq user.id
+        expect(res['data']['attributes']['folder-id']).to eq nil
+      end
     end
   end
 
