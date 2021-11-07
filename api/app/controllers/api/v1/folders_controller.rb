@@ -14,7 +14,7 @@ module Api
         if @folder.save
           render json: @folder, serializer: FolderSerializer
         else
-          render json: { status: 'error', errors: @folder.errors }
+          render status: :unprocessable_entity, json: @folder.errors
         end
       end
 
@@ -22,13 +22,13 @@ module Api
         if @folder.update(folder_params)
           render json: @folder, serializer: FolderSerializer
         else
-          render json: { status: 'error', errors: @folder.errors }
+          render status: :unprocessable_entity, json: @folder.errors
         end
       end
 
       def destroy
         if @folder.destroy
-          render json: @folder, serializer: FolderSerializer
+          render json: { status: 200, message: '削除に成功しました' }
         else
           render json: { status: 'error', errors: @folder.errors }
         end
@@ -46,8 +46,8 @@ module Api
 
       def correct_user?
         return if current_api_v1_user == @folder.user
-        render json: { success: false,
-                       errors: 'アクセスする権限がありません' }
+        render status: 401, json: { success: false,
+                                    errors: ['アクセスする権限がありません'] }
       end
 
     end
