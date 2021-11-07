@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_082502) do
+ActiveRecord::Schema.define(version: 2021_11_07_011634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "folders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.boolean "public", default: true, null: false, comment: "公開or非公開"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_folders_on_user_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -22,6 +31,8 @@ ActiveRecord::Schema.define(version: 2021_10_30_082502) do
     t.boolean "public", default: true, null: false, comment: "公開or非公開"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "folder_id", null: false
+    t.index ["folder_id"], name: "index_posts_on_folder_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -57,5 +68,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_082502) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "folders", "users"
+  add_foreign_key "posts", "folders"
   add_foreign_key "posts", "users"
 end
