@@ -1,9 +1,9 @@
 class UserSerializer < ActiveModel::Serializer
-  include Concerns::ImageUrl
+  include Rails.application.routes.url_helpers
+
   attributes :id, :name, :username, :image, :profile, :address, :created_at, :updated_at
+
   def image
-    image = url_for(object.avatar) if object.avatar.attached?
-    image = object.image unless object.avatar.attached?
-    image
+    object.avatar.attached? ? url_for(object.avatar) : object.image
   end
 end
