@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :folderrelationship do
+  factory :folder_relationship do
     
   end
 end

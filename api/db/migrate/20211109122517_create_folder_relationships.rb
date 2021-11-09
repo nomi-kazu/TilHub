@@ -1,4 +1,4 @@
-class CreateFolderrelationships < ActiveRecord::Migration[6.1]
+class CreateFolderRelationships < ActiveRecord::Migration[6.1]
   def up 
     create_table :folder_relationships do |t|
       t.references  :parent, foreign_key: { to_table: :folders }, name: 'index_folder_relationships_on_parent'
