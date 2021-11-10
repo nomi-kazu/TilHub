@@ -15,8 +15,9 @@ module Api
           if params[:parent_id]
             @relation = FolderRelationship.new(parent_id: folder_params[:parent_id], child_id: @folder.id)
             @relation.save
-            render json: @folder, serializer: FolderSerializer if @relation.valid?
-            render status: :unprocessable_entity, json: @relation.errors and @folder.destroy unless @relation.valid?
+            return render json: @folder, serializer: FolderSerializer if @relation.valid?
+
+            @folder.destroy
           end
         else
           render status: :unprocessable_entity, json: @folder.errors unless @folder.valid?
@@ -51,6 +52,7 @@ module Api
 
       def correct_user?
         return if current_api_v1_user == @folder.user
+
         render status: 401, json: { success: false,
                                     errors: ['アクセスする権限がありません'] }
       end
