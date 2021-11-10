@@ -17,7 +17,12 @@ module Api
             @relation.save
             return render json: @folder, serializer: FolderSerializer if @relation.valid?
 
+            # 子folderの削除
             @folder.destroy
+
+            render status: :unprocessable_entity, json: @relation.errors
+          else
+            render json: @folder, serializer: FolderSerializer
           end
         else
           render status: :unprocessable_entity, json: @folder.errors unless @folder.valid?
