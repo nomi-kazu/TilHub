@@ -4,8 +4,61 @@ RSpec.describe 'Api::V1::Folders', type: :request do
   describe 'GET /api/v1/folders/:id' do
     subject(:call_api){ get "/api/v1/folders/#{folder.id}" }
 
-    let(:user) { create(:confirmed_user) }
-    let(:folder) { create :folder, user_id: user.id }
+    let!(:user) { create(:confirmed_user) }
+    let!(:headers) { user.create_new_auth_token }
+    let!(:folder) { create :folder, user_id: user.id }
+
+    context '子folderが存在している場合' do
+      let!(:child_folder) { create :folder, user_id: user.id, parent_id: folder.id }
+      let!(:relation) { create :folder_relationship, parent_id: folder.id, child_id: child_folder.id }
+
+      it 'レスポンスステータスが200で返ること' do
+        call_api
+        expect(response.status).to eq 200
+      end
+
+      it 'レスポンスボディーにfolderの値が返ること' do
+        call_api
+        res = JSON.parse(response.body)
+        expect(res['data']['attributes']['name']).to eq 'folder_test'
+        expect(res['data']['attributes']['public']).to eq false
+        expect(res['data']['attributes']['user-id']).to eq user.id
+      end
+
+      it 'レスポンスボディーに子folderの値も含まれていること' do
+        call_api
+        res = JSON.parse(response.body)
+        expect(res['data']['attributes']['child-folders'][0]['name']).to eq child_folder.name
+        expect(res['data']['attributes']['child-folders'][0]['public']).to eq child_folder.public
+        expect(res['data']['attributes']['child-folders'][0]['user_id']).to eq child_folder.user_id
+      end
+    end
+
+    context '親folderが存在している場合' do
+      let!(:parent_folder) { create :folder, user_id: user.id }
+      before { folder.update(parent_id: parent_folder.id) }
+
+      it 'レスポンスステータスが200で返ること' do
+        call_api
+        expect(response.status).to eq 200
+      end
+
+      it 'レスポンスボディーにfolderの値が返ること' do
+        call_api
+        res = JSON.parse(response.body)
+        expect(res['data']['attributes']['name']).to eq 'folder_test'
+        expect(res['data']['attributes']['public']).to eq false
+        expect(res['data']['attributes']['user-id']).to eq user.id
+      end
+
+      it 'レスポンスボディーに親folderの値も含まれていること' do
+        call_api
+        res = JSON.parse(response.body)
+        expect(res['data']['attributes']['parent-folder']['name']).to eq parent_folder.name
+        expect(res['data']['attributes']['parent-folder']['public']).to eq parent_folder.public
+        expect(res['data']['attributes']['parent-folder']['user_id']).to eq parent_folder.user_id
+      end
+    end
 
     context 'postが存在している場合' do
       let!(:post) { create :post, user_id: user.id, folder_id: folder.id }
@@ -51,7 +104,7 @@ RSpec.describe 'Api::V1::Folders', type: :request do
     end
   end
 
-  describe 'POST /api/v1/posts' do
+  describe 'POST /api/v1/folders' do
     subject(:call_api){ post "/api/v1/folders", headers: headers, params: params }
 
     let(:user) { create(:confirmed_user) }
@@ -64,6 +117,7 @@ RSpec.describe 'Api::V1::Folders', type: :request do
           folder: {
             name: 'folder_test',
             public: false,
+            user_id: user.id
           }
         }
       end
@@ -109,7 +163,7 @@ RSpec.describe 'Api::V1::Folders', type: :request do
     end
   end
 
-  describe 'PUT /api/v1/posts/:id' do
+  describe 'PUT /api/v1/folders/:id' do
     subject(:call_api) { put "/api/v1/folders/#{folder.id}", headers: headers, params: params }
 
     let(:user) { create :confirmed_user }
@@ -178,7 +232,7 @@ RSpec.describe 'Api::V1::Folders', type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/posts/:id' do
+  describe 'DELETE /api/v1/folders/:id' do
     subject(:call_api) { delete "/api/v1/folders/#{folder.id}", headers: headers }
 
     let(:user) { create :confirmed_user }

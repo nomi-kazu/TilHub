@@ -12,9 +12,20 @@ module Api
       def create
         @folder = current_api_v1_user.folders.build(folder_params)
         if @folder.save
-          render json: @folder, serializer: FolderSerializer
+          if params[:parent_id]
+            @relation = FolderRelationship.new(parent_id: folder_params[:parent_id], child_id: @folder.id)
+            @relation.save
+            return render json: @folder, serializer: FolderSerializer if @relation.valid?
+
+            # 子folderの削除
+            @folder.destroy
+
+            render status: :unprocessable_entity, json: @relation.errors
+          else
+            render json: @folder, serializer: FolderSerializer
+          end
         else
-          render status: :unprocessable_entity, json: @folder.errors
+          render status: :unprocessable_entity, json: @folder.errors unless @folder.valid?
         end
       end
 
@@ -37,7 +48,7 @@ module Api
       private
 
       def folder_params
-        params.require(:folder).permit(:name, :public, :user_id)
+        params.require(:folder).permit(:name, :public, :user_id, :parent_id)
       end
 
       def set_folder
@@ -46,6 +57,7 @@ module Api
 
       def correct_user?
         return if current_api_v1_user == @folder.user
+
         render status: 401, json: { success: false,
                                     errors: ['アクセスする権限がありません'] }
       end
